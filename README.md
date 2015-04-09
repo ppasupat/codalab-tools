@@ -24,7 +24,7 @@ Tools for working with [CodaLab](https://github.com/codalab/codalab-cli)
             noremap qwe :wa<CR>:!CodaLabSave $UUID %:p<CR>:e<CR>
             noremap qrr :wa<CR>:!CodaLabLoad $UUID %:p<CR>:e<CR>
 
-        The first command save the worksheet. To be safe, it first downloads the worksheet 
+        The first command saves the worksheet. To be safe, it first downloads the worksheet 
         from the server, checks if there is any change and merges if necessary.
         The second command updates the worksheet to the latest version.
 
