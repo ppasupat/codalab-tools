@@ -1,4 +1,4 @@
-# codalab-tools
+# Ice's CodaLab Tools
 Tools for working with [CodaLab](https://github.com/codalab/codalab-cli)
 
 ## Vim Integration
