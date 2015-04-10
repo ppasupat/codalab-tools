@@ -7,16 +7,16 @@
 // ==/UserScript==
 
 (function() {
-  var NUMCOLS = 35;
+  // Custom rendering modules
+  var node = document.createElement('script');
+  node.src = 'https://dl.dropboxusercontent.com/u/7408879/fig/markdown_bundle_interface.js';
+  document.head.appendChild(node);
+  node = document.createElement('script');
+  node.src = 'https://dl.dropboxusercontent.com/u/7408879/fig/table_bundle_interface.js';
+  document.head.appendChild(node);
+  
+  // CSS
   var color = "#dfedf7";
-  function thatCol(col) {
-    var head = "#worksheet_content .type-table table xxx:first-child:nth-last-child(" + NUMCOLS + ")";
-    if (col == 1) {
-      return head.replace(/xxx/, "th") + ", " + head.replace(/xxx/, "td");
-    } else {
-      return head.replace(/xxx/, "th") + " ~ th:nth-child(" + col + "), " + head.replace(/xxx/, "td") + " ~ td:nth-child(" + col + ")";
-    }
-  }
   GM_addStyle([
     // Make boxes big
     "#worksheet > .container",
@@ -45,10 +45,10 @@
     "#worksheet_content .type-table table.focused",
     "{ box-shadow: 0 0 5px 5px #dfedf7; }",
     // Column highlighting
-    thatCol(32),
-    "{ font-weight: bold; color: #C55; }",
-    thatCol(8) + ", " + thatCol(21) + ", " + thatCol(29),
-    "{ background-color: #AAA; color: #AAA; width: 3px; padding: 0;}",
+    "#worksheet_content .type-table .ice-table-acc, #worksheet_content .type-table .ice-table-dv_cor",
+    "{ font-weight: bold; color: #C55 !important; }",
+    "#worksheet_content .type-table .ice-table-_7C",
+    "{ background-color: #AAA !important; color: #AAA !important; width: 3px !important; padding: 0 !important;}",
     ""].join(" "));
-  
+
 })();
