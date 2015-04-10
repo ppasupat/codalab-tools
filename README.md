@@ -26,10 +26,15 @@ Tools for working with [CodaLab](https://github.com/codalab/codalab-cli)
         * If only the remote copy is edited, update the editor to match the remote copy.
         * If only the local copy is edited, save the copy and update the editor.
         * If both copies are edited, merge (default: with Meld), save the copy, and update the editor.
+        
+        **Note:** The vim command above uses the `CodaLabSave` function defined in `ce`,
+        and thus will only work with `ce` (and not `cl wedit`).
+        
+        **Note:** `ce` currently only works in Bash.
 
 ## Browser Integration
 
-* `CodaLab_Formatting.user.js`: Greasemonkey script for editing CSS of the worksheet view.
+* `CodaLab_Formatting.user.js`: Greasemonkey/TamperMonkey script for editing CSS of the worksheet view.
     It contains several general hacks (editing margins, colors, etc.)
     as well as some specific hacks (for my particular experiment tables.)
 
