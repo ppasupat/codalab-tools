@@ -32,6 +32,10 @@
     "{ margin: 6px 1em 12px 0; display: inline-block; } ",
     "#worksheet_content .type-markup::before, #worksheet_content .type-markup::after",
     "{ content: none; }",
+    "#worksheet_content .type-image",
+    "{ text-align: center }",
+    "#worksheet_content .type-image img",
+    "{ width: auto; }",
     // Change margins in Markdown
     "#worksheet_content .type-markup h1, #worksheet_content .type-markup h2, #worksheet_content .type-markup h3",
     "{ margin: 18px 0 12px; } ",
@@ -43,7 +47,14 @@
     "{ background-color: " + color + "; box-shadow: 0 0 5px 5px " + color + "; }",
     "#worksheet_content .type-record table.focused,",
     "#worksheet_content .type-table table.focused",
-    "{ box-shadow: 0 0 5px 5px #dfedf7; }",
+    "{ box-shadow: 0 0 5px 5px " + color + "; }",
+    // Other colors / formattings
+    "body",
+    "{ color: #555; }",
+    "#worksheet_content .type-table td",
+    "{ white-space: nowrap; max-width: 25em; overflow: hidden; text-overflow: ellipsis; }",
+    "#worksheet_content .type-table td:hover",
+    "{ white-space: normal; overflow: auto; }",
     // Column highlighting
     "#worksheet_content .type-table .ice-table-acc, #worksheet_content .type-table .ice-table-dv_cor",
     "{ font-weight: bold; color: #C55 !important; }",
