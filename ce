@@ -55,6 +55,6 @@ export -f CodaLabLoad
 export UUID
 CodaLabLoad $UUID $FILENAME
 echo Editing $FILENAME ...
-vi $FILENAME
+vi -c ":set nowrap" $FILENAME
 CodaLabSave $UUID $FILENAME
 rm $FILENAME

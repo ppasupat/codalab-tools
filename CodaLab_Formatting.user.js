@@ -57,6 +57,9 @@
     "{ white-space: normal; overflow: auto; }",
     // Column highlighting
     "#worksheet_content .type-table .ice-table-acc, #worksheet_content .type-table .ice-table-dv_cor",
+    ", #worksheet_content .type-table .ice-table-dv_0_cor",
+    ", #worksheet_content .type-table .ice-table-dv_1_cor",
+    ", #worksheet_content .type-table .ice-table-dv_2_cor",
     "{ font-weight: bold; color: #C55 !important; }",
     "#worksheet_content .type-table .ice-table-_7C",
     "{ background-color: #AAA !important; color: #AAA !important; width: 3px !important; padding: 0 !important;}",
