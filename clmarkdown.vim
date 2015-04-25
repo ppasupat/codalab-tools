@@ -1,6 +1,11 @@
 " Vim syntax file
 " Language: Markdown (CodaLab flavor)
 
+" Usage: Put this file in the ~/.vim/syntax/ directory
+"   (C:\Users\username\_vim\syntax\ on Windows)
+" And add the following to ~/.vimrc (C:\Users\username\_vimrc on Windows):
+"   autocmd BufNewFile,BufRead /tmp/*.md set filetype=clmarkdown
+
 if exists("b:current_syntax")
   finish
 endif
