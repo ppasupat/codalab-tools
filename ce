@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Change the difftool here:
+DIFFTOOL=meld
+if [[ -z "$DISPLAY" ]]; then
+  DIFFTOOL=vimdiff
+fi
+
 DIRNAME=/tmp/codalab
 mkdir -p $DIRNAME
 UUID=$(cl work -u)
@@ -9,7 +15,11 @@ if [[ -f "$FILENAME" ]]; then
   exit 1
 fi
 
-cl status | sed 's/^worksheet.*/\x1b[1;33m&\x1b[0m/;s+http://localhost:12800$+\x1b[1;32mremote\x1b[0m+;s+local$+\x1b[1;31mlocal\x1b[0m+'
+cl status | sed '
+  s`^worksheet.*`\x1b[1;33m&\x1b[0m`;
+  s`https*://localhost:12800$`\x1b[1;32mNLP\x1b[0m`
+  s`https*://codalab.org/bundleservice$`\x1b[1;36mCodaLab.org\x1b[0m`
+  s`local$`\x1b[1;31mlocal\x1b[0m`'
 read -p "Is this good (y/n)? " answer
 [[ "$answer" == y ]] || exit 1
 
@@ -33,8 +43,8 @@ function CodaLabSave() {
     fi
   else
     if [[ $REMOTE_CHANGED -ne 0 ]]; then
-      echo "Remote modified. Launching meld ..."
-      meld $LOCAL $REMOTE
+      echo "Remote modified. Launching $DIFFTOOL ..."
+      $DIFFTOOL $LOCAL $REMOTE
     fi
     echo "Saving ..."
     cl wedit $UUID -f $LOCAL

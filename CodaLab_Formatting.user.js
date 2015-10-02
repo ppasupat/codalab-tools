@@ -1,28 +1,53 @@
 // ==UserScript==
 // @name        CodaLab Formatting
 // @namespace   ice
-// @include     http://localhost:18000/worksheets/*
+// @include     /^https?://localhost:18000/(worksheets|bundles)/?(0x[0-9a-f]*/?)?$/
+// @include     /^https?://www\.codalab\.org/(worksheets|bundles)/?(0x[0-9a-f]*/?)?$/
 // @version     1
 // @grant       GM_addStyle
 // ==/UserScript==
 
 (function() {
-  // Custom rendering modules
-  var node = document.createElement('script');
-  node.src = 'https://dl.dropboxusercontent.com/u/7408879/fig/markdown_bundle_interface.js';
-  document.head.appendChild(node);
-  node = document.createElement('script');
-  node.src = 'https://dl.dropboxusercontent.com/u/7408879/fig/table_bundle_interface.js';
-  document.head.appendChild(node);
-  
+  // In bundles view, the [s] key will sort files!
+  if (/bundles/.test(window.location)) {
+    window.addEventListener('keydown', function (event) {
+      if (event.keyCode === 83) {
+        var fileBrowser = document.getElementsByClassName('file-browser-table')[0].children[0];
+        var rows = Array.prototype.slice.call(fileBrowser.children);
+        rows.sort(function (a, b) {
+          a = a.getElementsByTagName('div')[0];
+          b = b.getElementsByTagName('div')[0]
+          var aIsDir = /directory/.test(a.className);
+          var bIsDir = /directory/.test(b.className);
+          var aText = a.children[1].innerHTML;
+          var bText = b.children[1].innerHTML;
+          if (aText === '..') return false;
+          if (bText === '..') return true;
+          if (aIsDir && !bIsDir) return false;
+          if (!aIsDir && bIsDir) return true;
+          return aText > bText;
+        });
+        rows.forEach(function (x) {
+          fileBrowser.appendChild(x);
+        });
+      }
+    });
+  }
   // CSS
-  var color = "#dfedf7";
+  var color = "#e4effa";
   GM_addStyle([
-    // Make boxes big
-    "#worksheet > .container",
-    "{ width: auto; }",
-    "#worksheet_content #raw-textarea",
-    "{ height: " + Math.max(250, window.innerHeight - 300) + "px; }",
+    // Fonts
+    "body, h1, h2, h3, h4, h5, h6",
+    "{ font-family: \"Liberation Sans\"; }",
+    "#worksheet_content",
+    "{ line-height: 1.5; }",
+    ".terminal, .cmd",
+    "{ font-family: monospace; font-size: 10px; }",
+    // Change margins and paddings of page
+    "#worksheet",
+    "{ height: calc(100% - 45px); }",
+    "#worksheet #worksheet_panel, #worksheet #worksheet_panel.actionbar-focus",
+    "{ padding-top: 45px !important; }",
     "#worksheet_content .type-table table",
     "{ width: auto; }",
     // Change margins of boxes
@@ -39,6 +64,8 @@
     // Change margins in Markdown
     "#worksheet_content .type-markup h1, #worksheet_content .type-markup h2, #worksheet_content .type-markup h3",
     "{ margin: 18px 0 12px; } ",
+    " #worksheet_content .ws-item, #worksheet_content .type-markup li",
+    "{ margin-top: 6px; margin-bottom: 6px; }",
     "#worksheet_content .type-markup ul ul, #worksheet_content .type-markup ul ol,",
     "#worksheet_content .type-markup ol ul, #worksheet_content .type-markup ol ol",
     "{ margin-bottom: 0; }",
@@ -50,19 +77,19 @@
     "{ box-shadow: 0 0 5px 5px " + color + "; }",
     // Other colors / formattings
     "body",
-    "{ color: #555; }",
+    "{ color: #5e5e5e; }",
     "#worksheet_content .type-table td",
     "{ white-space: nowrap; max-width: 25em; overflow: hidden; text-overflow: ellipsis; }",
-    "#worksheet_content .type-table td:hover",
-    "{ white-space: normal; overflow: auto; }",
+    // Disabled because it changes some column widths, making it wiggle too much
+    //"#worksheet_content .type-table td:hover",
+    //"{ white-space: normal; overflow: auto; }",
     // Column highlighting
-    "#worksheet_content .type-table .ice-table-acc, #worksheet_content .type-table .ice-table-dv_cor",
-    ", #worksheet_content .type-table .ice-table-dv_0_cor",
-    ", #worksheet_content .type-table .ice-table-dv_1_cor",
-    ", #worksheet_content .type-table .ice-table-dv_2_cor",
+    "#worksheet_content .type-table .table-column-acc, #worksheet_content .type-table .table-column-dv_cor",
+    ", #worksheet_content .type-table .table-column-dv_0_cor",
+    ", #worksheet_content .type-table .table-column-dv_1_cor",
+    ", #worksheet_content .type-table .table-column-dv_2_cor",
     "{ font-weight: bold; color: #C55 !important; }",
-    "#worksheet_content .type-table .ice-table-_7C",
-    "{ background-color: #AAA !important; color: #AAA !important; width: 3px !important; padding: 0 !important;}",
+    ".table-column-_7C",
+    "{ max-width: 5px !important; }",
     ""].join(" "));
-
 })();
