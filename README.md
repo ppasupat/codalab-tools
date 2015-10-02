@@ -25,7 +25,8 @@ Tools for working with [CodaLab](https://github.com/codalab/codalab-cli)
 
         * If only the remote copy is edited, update the editor to match the remote copy.
         * If only the local copy is edited, save the copy and update the editor.
-        * If both copies are edited, merge (default: with Meld), save the copy, and update the editor.
+        * If both copies are edited, merge (default: meld in GUI environment and vimdiff otherwise),
+            save the copy, and update the editor.
         
         **Note:** The vim command above uses the `CodaLabSave` function defined in `ce`,
         and thus will only work with `ce` (and not `cl wedit`).
