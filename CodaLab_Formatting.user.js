@@ -2,6 +2,7 @@
 // @name        CodaLab Formatting
 // @namespace   ice
 // @include     /^https?://localhost:18000/(worksheets|bundles)/?(0x[0-9a-f]*/?)?$/
+// @include     /^https?://codalab\.stanford\.edu/(worksheets|bundles)/?(0x[0-9a-f]*/?)?$/
 // @include     /^https?://www\.codalab\.org/(worksheets|bundles)/?(0x[0-9a-f]*/?)?$/
 // @version     1
 // @grant       GM_addStyle
@@ -34,16 +35,22 @@
     });
   }
   // CSS
-  var color = "#e4effa";
+  var color = "#e7f3fa";
   GM_addStyle([
     // Fonts
     "body, h1, h2, h3, h4, h5, h6",
     "{ font-family: \"Liberation Sans\"; }",
     "#worksheet_content",
     "{ line-height: 1.5; }",
+    ".terminal, .cmd, code, kbd, pre, samp",
+    "{ font-family: \"DejaVu Sans Mono\", monospace; }",
     ".terminal, .cmd",
-    "{ font-family: monospace; font-size: 10px; }",
-    // Change margins and paddings of page
+    "{ font-size: 10px; }",
+    "#worksheet_content .type-markup code",
+    "{ font-size: 90%; }",
+    // Change positions, margins and paddings of page
+    "#worksheet-message",
+    "{ position: absolute; left: 20px; top: 100px; padding: 20px; }",
     "#worksheet",
     "{ height: calc(100% - 45px); }",
     "#worksheet #worksheet_panel, #worksheet #worksheet_panel.actionbar-focus",
@@ -55,6 +62,8 @@
     "{ margin: 6px 0 6px; min-height: 0; }",
     "#worksheet_content .type-table, #worksheet_content .type-record",
     "{ margin: 6px 1em 12px 0; display: inline-block; } ",
+    "#worksheet_content pre",
+    "{ padding: 6px 0 6px 9px; text-indent: 0; }",
     "#worksheet_content .type-markup::before, #worksheet_content .type-markup::after",
     "{ content: none; }",
     "#worksheet_content .type-image",
