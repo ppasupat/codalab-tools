@@ -87,6 +87,8 @@
     // Other colors / formattings
     "body",
     "{ color: #5e5e5e; }",
+    "#worksheet_content .type-table table, #worksheet_content .type-table table.focused",
+    "{ border-top: 3px solid #DDD; }",
     "#worksheet_content .type-table td",
     "{ white-space: nowrap; max-width: 25em; overflow: hidden; text-overflow: ellipsis; }",
     // Disabled because it changes some column widths, making it wiggle too much
