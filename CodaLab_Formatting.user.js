@@ -34,6 +34,22 @@
       }
     });
   }
+  // Remove "MISSING" cells + Add tooltip text
+  (function () {
+    var target = document.getElementById("update_progress");
+    new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (target.style.display == 'none') {
+          var cells = document.querySelectorAll("#worksheet_content div.type-table td");
+          for (var i = 0; i < cells.length; i++) {
+            if (cells[i].textContent == 'MISSING')
+              cells[i].textContent = '';
+            cells[i].title = cells[i].textContent;
+          }
+        }
+      });
+    }).observe(target, { attributes: true });
+  })();
   // CSS
   var color = "#e7f3fa";
   GM_addStyle([
@@ -95,12 +111,15 @@
     //"#worksheet_content .type-table td:hover",
     //"{ white-space: normal; overflow: auto; }",
     // Column highlighting
-    "#worksheet_content .type-table .table-column-acc, #worksheet_content .type-table .table-column-dv_cor",
+    "#worksheet_content .type-table .table-column-acc",
+    ", #worksheet_content .type-table .table-column-dv_cor",
     ", #worksheet_content .type-table .table-column-dv_0_cor",
     ", #worksheet_content .type-table .table-column-dv_1_cor",
     ", #worksheet_content .type-table .table-column-dv_2_cor",
     "{ font-weight: bold; color: #C55 !important; }",
-    ".table-column-_7C",
+    "#worksheet_content .type-table .table-column-ts_cor",
+    "{ font-weight: bold; color: #C5C !important; }",
+    "#worksheet_content .type-table .table-column-_7C",
     "{ max-width: 5px !important; }",
     ""].join(" "));
 })();
