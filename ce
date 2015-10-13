@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# Change the difftool here:
-DIFFTOOL=meld
-if [[ -z "$DISPLAY" ]]; then
-  DIFFTOOL=vimdiff
-fi
-
 DIRNAME=/tmp/codalab
 mkdir -p $DIRNAME
 UUID=$(cl work -u)
@@ -43,6 +37,9 @@ function CodaLabSave() {
     fi
   else
     if [[ $REMOTE_CHANGED -ne 0 ]]; then
+      # Change the difftool here:
+      DIFFTOOL=meld
+      [[ -z "$DISPLAY" ]] && DIFFTOOL=vimdiff
       echo "Remote modified. Launching $DIFFTOOL ..."
       $DIFFTOOL $LOCAL $REMOTE
     fi
