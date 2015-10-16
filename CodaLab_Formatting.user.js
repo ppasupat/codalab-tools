@@ -68,8 +68,10 @@
     // Change positions, margins and paddings of page
     "#worksheet-message",
     "{ position: absolute; left: 20px; top: 100px; padding: 20px; }",
+    "footer",
+    "{ display: none; }",
     "#worksheet",
-    "{ height: calc(100% - 45px); }",
+    "{ height: calc(100% - 20px); }",
     "#worksheet #worksheet_panel, #worksheet #worksheet_panel.actionbar-focus",
     "{ padding-top: 45px !important; }",
     "#worksheet_content .type-table table",
