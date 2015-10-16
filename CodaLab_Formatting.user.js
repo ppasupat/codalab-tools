@@ -37,6 +37,7 @@
   // Remove "MISSING" cells + Add tooltip text
   (function () {
     var target = document.getElementById("update_progress");
+    if (!target) return;
     new MutationObserver(function (mutations) {
       mutations.forEach(function (mutation) {
         if (target.style.display == 'none') {
