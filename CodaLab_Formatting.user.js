@@ -45,6 +45,8 @@
           for (var i = 0; i < cells.length; i++) {
             if (cells[i].textContent == 'MISSING')
               cells[i].textContent = '';
+            else if (/table-column-state/.test(cells[i].className) && cells[i].textContent)
+              cells[i].className += ' state-' + cells[i].textContent;
             cells[i].title = cells[i].textContent;
           }
         }
@@ -124,5 +126,10 @@
     "{ font-weight: bold; color: #C5C !important; }",
     "#worksheet_content .type-table .table-column-_7C",
     "{ max-width: 5px !important; }",
+    ".table-column-state { font-weight: bold; }",
+    ".table-column-state.state-ready { color: #73b431; }",
+    ".table-column-state.state-running { color: #f97706; }",
+    ".table-column-state.state-failed { color: #d2322d; }",
+    ".table-column-state.state-queued { color: #7d38c7; }",
     ""].join(" "));
 })();
