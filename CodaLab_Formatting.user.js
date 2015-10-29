@@ -46,6 +46,7 @@
             if (/table-column-state/.test(cells[i].className) && cells[i].textContent) {
               cells[i].className = cells[i].className.replace(/\sstate-\S*/, '');
               cells[i].className += ' state-' + cells[i].textContent;
+            }
             cells[i].title = cells[i].textContent;
           }
           var title = document.getElementById("title");
