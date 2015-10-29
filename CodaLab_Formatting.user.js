@@ -34,7 +34,7 @@
       }
     });
   }
-  // Remove "MISSING" cells + Add tooltip text
+  // Remove "MISSING" cells + Add tooltip text + Title
   (function () {
     var target = document.getElementById("update_progress");
     if (!target) return;
@@ -48,6 +48,10 @@
             else if (/table-column-state/.test(cells[i].className) && cells[i].textContent)
               cells[i].className += ' state-' + cells[i].textContent;
             cells[i].title = cells[i].textContent;
+          }
+          var title = document.getElementById("title");
+          if (title && !title.textContent.trim()) {
+            title.innerHTML = '(UNTITLED)';
           }
         }
       });
@@ -67,6 +71,10 @@
     "{ font-size: 10px; }",
     "#worksheet_content .type-markup code",
     "{ font-size: 90%; }",
+    "#worksheet_content .worksheet-title",
+    "{ padding-top: 20px; }",
+    "#worksheet_content .worksheet-title #title",
+    "{ font-size: 130%; font-weight: bold; }",
     // Change positions, margins and paddings of page
     "#worksheet-message",
     "{ position: absolute; left: 20px; top: 100px; padding: 20px; }",
@@ -91,6 +99,10 @@
     "{ text-align: center }",
     "#worksheet_content .type-image img",
     "{ width: auto; }",
+    "#worksheet .ws-panel",
+    "{ padding-top: 10px; padding-bottom: 10px; }",
+    ".ws-panel > div:nth-child(1) > button",
+    "{ font-size: 80%; }",
     // Change margins in Markdown
     "#worksheet_content .type-markup h1, #worksheet_content .type-markup h2, #worksheet_content .type-markup h3",
     "{ margin: 18px 0 12px; } ",
