@@ -43,9 +43,8 @@
         if (target.style.display == 'none') {
           var cells = document.querySelectorAll("#worksheet_content div.type-table td");
           for (var i = 0; i < cells.length; i++) {
-            if (cells[i].textContent == 'MISSING')
-              cells[i].textContent = '';
-            else if (/table-column-state/.test(cells[i].className) && cells[i].textContent)
+            if (/table-column-state/.test(cells[i].className) && cells[i].textContent) {
+              cells[i].className = cells[i].className.replace(/\sstate-\S*/, '');
               cells[i].className += ' state-' + cells[i].textContent;
             cells[i].title = cells[i].textContent;
           }
@@ -120,6 +119,8 @@
     // Other colors / formattings
     "body",
     "{ color: #5e5e5e; }",
+    "#command_line",
+    "{ background-color: inherit; }",
     "#worksheet_content .type-table table, #worksheet_content .type-table table.focused",
     "{ border-top: 3px solid #DDD; }",
     "#worksheet_content .type-table td",
