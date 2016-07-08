@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cl print | sed '
+  s`\bfailed\|exception\b`\x1b[1;31m\0\x1b[0m`g;
+  s`\bdone\|ready\b`\x1b[1;32m\0\x1b[0m`g;
+  s`\brunning\b`\x1b[1;33m\0\x1b[0m`g;
+  s`\bqueued\b`\x1b[1;35m\0\x1b[0m`g;
+  s`\bcreated\b`\x1b[1;34m\0\x1b[0m`g'
+
